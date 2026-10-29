@@ -1,35 +1,67 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="nl">
   <head>
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no" />
+    <meta name="theme-color" content="#05070A" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Site Measure" />
+    <meta name="description" content="Opmeten met de laser, tekenen op schaal." />
     <title>Site Measure</title>
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
     <style id="expo-reset">
-      /* These styles make the body full-height */
+      /* Same tokens as platform.primecircle.cloud/assets/tokens.css */
       html,
       body {
         height: 100%;
+        -webkit-text-size-adjust: 100%;
       }
-      /* These styles disable body scrolling if you are using <ScrollView> */
       body {
+        margin: 0;
         overflow: hidden;
+        background: #05070a;
+        color: #e8f2f8;
+        color-scheme: dark;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        background-image: radial-gradient(1200px 700px at 78% -8%, rgba(24, 191, 255, 0.1), transparent 60%),
+          radial-gradient(900px 600px at -10% 30%, rgba(255, 122, 89, 0.045), transparent 60%);
+        background-repeat: no-repeat;
       }
-      /* These styles make the root element full-height */
       #root {
         display: flex;
         height: 100%;
         flex: 1;
       }
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #55697a;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #18bfff !important;
+        box-shadow: 0 0 0 3px rgba(24, 191, 255, 0.2);
+      }
+      ::selection {
+        background: rgba(24, 191, 255, 0.35);
+      }
     </style>
   <link rel="icon" href="/favicon.ico"/></head>
-
   <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript> You need to enable JavaScript to run this app. </noscript>
-    <!-- The root element for your Expo app. -->
+    <noscript>Site Measure heeft JavaScript nodig.</noscript>
     <div id="root"></div>
-  <script src="/_expo/static/js/web/index-ff4bc773b9db49f95178008a2fd4338f.js" defer></script>
+  <script src="/_expo/static/js/web/index-70c363cd56de9225bfbe5ab0dcb0c234.js" defer></script>
 </body>
 </html>
