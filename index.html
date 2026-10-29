@@ -4,24 +4,53 @@
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no" />
-    <meta name="theme-color" content="#05070A" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Site Measure" />
-    <meta name="description" content="Opmeten met de laser, tekenen op schaal." />
+    <meta name="description" content="Opmeten met de laser, tekenen op schaal, offerte in één keer." />
     <title>Site Measure</title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Paint the chosen theme before the bundle loads, so the page never flashes. Same key as src/ui/theme.ts.
+      (function () {
+        var dark = false;
+        try {
+          var pref = localStorage.getItem('siteMeasure.theme');
+          dark = pref === 'dark' || (pref !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? '#18191C' : '#FFFFFF');
+      })();
+    </script>
     <style id="expo-reset">
-      /* Same tokens as platform.primecircle.cloud/assets/tokens.css */
+      /* Same tokens as src/ui/theme.ts */
+      :root {
+        --bg: #f4f1ec;
+        --text: #18191b;
+        --placeholder: #9ba0a6;
+        --accent: #ea580c;
+        --glow: rgba(234, 88, 12, 0.07);
+        color-scheme: light;
+      }
+      html[data-theme='dark'] {
+        --bg: #121315;
+        --text: #f3f2ef;
+        --placeholder: #6f757c;
+        --accent: #f97316;
+        --glow: rgba(249, 115, 22, 0.1);
+        color-scheme: dark;
+      }
       html,
       body {
         height: 100%;
@@ -30,12 +59,10 @@
       body {
         margin: 0;
         overflow: hidden;
-        background: #05070a;
-        color: #e8f2f8;
-        color-scheme: dark;
-        font-family: 'IBM Plex Sans', system-ui, sans-serif;
-        background-image: radial-gradient(1200px 700px at 78% -8%, rgba(24, 191, 255, 0.1), transparent 60%),
-          radial-gradient(900px 600px at -10% 30%, rgba(255, 122, 89, 0.045), transparent 60%);
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        background-image: radial-gradient(900px 520px at 88% -12%, var(--glow), transparent 60%);
         background-repeat: no-repeat;
       }
       #root {
@@ -48,16 +75,16 @@
       }
       input::placeholder,
       textarea::placeholder {
-        color: #55697a;
+        color: var(--placeholder);
       }
       input:focus,
       textarea:focus {
         outline: none;
-        border-color: #18bfff !important;
-        box-shadow: 0 0 0 3px rgba(24, 191, 255, 0.2);
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.18);
       }
       ::selection {
-        background: rgba(24, 191, 255, 0.35);
+        background: rgba(234, 88, 12, 0.25);
       }
     </style>
   <link rel="icon" href="/favicon.ico"/></head>
@@ -71,15 +98,16 @@
         if (!('serviceWorker' in navigator) || (location.hostname === 'localhost' && location.port === '8081')) return;
         function showUpdate() {
           if (document.getElementById('sm-update')) return;
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
           var bar = document.createElement('div');
           bar.id = 'sm-update';
           bar.style.cssText =
             'position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;display:flex;align-items:center;gap:12px;padding:12px 14px;' +
-            'background:#0E1822;border:1px solid rgba(24,191,255,0.35);border-radius:14px;color:#E8F2F8;font:14px/1.4 "IBM Plex Sans",system-ui,sans-serif;' +
-            'box-shadow:0 12px 40px rgba(0,0,0,0.5);max-width:520px;margin:0 auto';
+            'background:' + (dark ? '#1E2024' : '#FFFFFF') + ';border:1px solid ' + (dark ? 'rgba(255,255,255,0.14)' : 'rgba(24,25,27,0.12)') + ';border-radius:16px;color:' + (dark ? '#F3F2EF' : '#18191B') + ';' +
+            'font:14px/1.4 "Inter",system-ui,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,0.25);max-width:520px;margin:0 auto';
           bar.innerHTML =
             '<span style="flex:1">Er staat een nieuwe versie van Site Measure klaar.</span>' +
-            '<button type="button" style="background:#18BFFF;color:#00131C;border:0;border-radius:999px;padding:9px 16px;font:600 14px \'IBM Plex Sans\',system-ui,sans-serif;cursor:pointer">Vernieuwen</button>';
+            '<button type="button" style="background:#EA580C;color:#1B1007;border:0;border-radius:12px;padding:10px 16px;font:600 14px \'Inter\',system-ui,sans-serif;cursor:pointer">Vernieuwen</button>';
           bar.querySelector('button').onclick = function () {
             location.reload();
           };
@@ -108,6 +136,6 @@
         });
       })();
     </script>
-  <script src="/_expo/static/js/web/index-3c8da3bf263a65397ad689da95b9775d.js" defer></script>
+  <script src="/_expo/static/js/web/index-5cbe367db656b7011be55a3b1300afbe.js" defer></script>
 </body>
 </html>
