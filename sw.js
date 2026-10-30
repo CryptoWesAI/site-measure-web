@@ -1,11 +1,11 @@
 /*
  * Site Measure service worker: keeps the app itself available on site without a signal.
  * Projects live on the device anyway; this makes sure the pages and the code load too.
- * de04a719a2d5f6c2b31157a3501ed89a and /_expo/static/js/web/index-de04a719a2d5f6c2b31157a3501ed89a.js are filled in by scripts/deploy-web.sh, so every deploy installs
+ * 8462316afc2a789269ba265121dff37a and /_expo/static/js/web/index-8462316afc2a789269ba265121dff37a.js are filled in by scripts/deploy-web.sh, so every deploy installs
  * a fresh cache and the old one is dropped.
  */
-const BUILD = 'de04a719a2d5f6c2b31157a3501ed89a';
-const BUNDLE = '/_expo/static/js/web/index-de04a719a2d5f6c2b31157a3501ed89a.js';
+const BUILD = '8462316afc2a789269ba265121dff37a';
+const BUNDLE = '/_expo/static/js/web/index-8462316afc2a789269ba265121dff37a.js';
 const CACHE = 'site-measure-' + BUILD;
 const SHELL = ['/', '/index.html', '/manifest.json', '/icons/icon-192.png', '/icons/icon-512.png', '/apple-touch-icon.png', '/favicon.ico', '/bluefy.html'];
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
