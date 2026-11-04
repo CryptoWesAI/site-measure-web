@@ -108,6 +108,43 @@
       ::selection {
         background: rgba(234, 88, 12, 0.25);
       }
+      /* Homepage scrollbar, desktop only (touch screens keep their own overlay bar). Slim rounded thumb that turns orange on hover. */
+      :root {
+        --sb-thumb: rgba(24, 25, 27, 0.3);
+        --sb-thumb-hover: #ea580c;
+        --sb-track: rgba(24, 25, 27, 0.04);
+      }
+      html[data-theme='dark'] {
+        --sb-thumb: rgba(243, 242, 239, 0.3);
+        --sb-thumb-hover: #f97316;
+        --sb-track: rgba(243, 242, 239, 0.05);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        [data-landing-scroll]::-webkit-scrollbar {
+          width: 14px;
+        }
+        [data-landing-scroll]::-webkit-scrollbar-track {
+          background: var(--sb-track);
+        }
+        [data-landing-scroll]::-webkit-scrollbar-thumb {
+          background: var(--sb-thumb);
+          border: 4px solid transparent;
+          border-radius: 999px;
+          background-clip: padding-box;
+          min-height: 48px;
+        }
+        [data-landing-scroll]::-webkit-scrollbar-thumb:hover,
+        [data-landing-scroll]::-webkit-scrollbar-thumb:active {
+          background: var(--sb-thumb-hover);
+          background-clip: padding-box;
+        }
+        @supports not selector(::-webkit-scrollbar) {
+          [data-landing-scroll] {
+            scrollbar-width: thin;
+            scrollbar-color: var(--sb-thumb) transparent;
+          }
+        }
+      }
     </style>
   <link rel="icon" href="/favicon.ico"/></head>
   <body>
@@ -159,6 +196,6 @@
         });
       })();
     </script>
-  <script src="/_expo/static/js/web/index-050390d1a82b7757eb9f461bc6581def.js" defer></script>
+  <script src="/_expo/static/js/web/index-dd3bc5e65f8ed69923c4aea0e380c7cd.js" defer></script>
 </body>
 </html>
