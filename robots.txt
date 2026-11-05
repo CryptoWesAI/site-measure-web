@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://measure.primecircle.cloud/sitemap.xml
